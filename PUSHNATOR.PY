@@ -45,16 +45,16 @@ options.add_experimental_option("detach", True)  # Após executar o script Selen
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(options=options, service=service)
 
-# Abrindo PJE e fazendo o login
-driver.get("https://pje1g.trf3.jus.br/pje/login.seam")  # URL do PJE
+# Abrindo Site e fazendo o login
+driver.get("https://seusite.com")  # URL do PJE
 
 # A página de login tem um iframe que barra a automação, esse trecho burla esse iframe
 frame_correta = driver.find_element(By.XPATH, '//*[@id="ssoFrame"]')
 driver.switch_to.frame(frame_correta)
 
 # Identificando os IDs e inserindo o login
-login = driver.find_element(By.ID, 'username').send_keys('52312819805')  # Alterar CPF aqui
-senha = driver.find_element(By.ID, 'password').send_keys('Eg@5044326')  # Alterar senha aqui
+login = driver.find_element(By.ID, 'username').send_keys('SeuUsername')  # Alterar CPF aqui
+senha = driver.find_element(By.ID, 'password').send_keys('SeuPassword')  # Alterar senha aqui
 sleep(2)
 clic = driver.find_element(By.ID, 'kc-login').click()
 
@@ -67,7 +67,7 @@ except Exception as e:
     print(f"Ocorreu um erro durante o login ou o redirecionamento: {e}")
 
 # Redirecionar para uma URL específica após o login
-nova_url = "https://pje1g.trf3.jus.br/pje/Push/listView.seam"
+nova_url = "https://SuaOutraPaginaAposOLogin"
 driver.get(nova_url)
 print(f"Redirecionado para {nova_url}")
 
